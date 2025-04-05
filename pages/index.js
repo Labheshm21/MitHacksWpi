@@ -1,3 +1,4 @@
+// pages/index.js
 import Link from 'next/link';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <CssBaseline />
       <Header />
+
       <Box
         sx={{
           minHeight: '80vh',
@@ -21,7 +23,8 @@ export default function Home() {
           background: 'linear-gradient(135deg, #2196f3, #66bb6a)',
           color: 'common.white',
           textAlign: 'center',
-          p: 4,
+          px: 2,
+          py: 8,
         }}
       >
         <Container maxWidth="md">
@@ -31,8 +34,7 @@ export default function Home() {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              textShadow: '2px 2px 6px rgba(0,0,0,0.2)',
-              animation: 'fadeIn 1.2s ease-in-out',
+              textShadow: '2px 2px 6px rgba(0,0,0,0.3)',
             }}
           >
             Welcome to the Future of Startup Investing
@@ -53,31 +55,31 @@ export default function Home() {
             Join as an investor or list your startup to raise funds transparently.
           </Typography>
 
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            component={Link}
-            href="/campaign"
-            sx={{
-              px: 4,
-              py: 1.5,
-              borderRadius: '30px',
-              fontWeight: 'bold',
-              textTransform: 'none',
-              boxShadow: 4,
-              backgroundColor: '#fdd835',
-              color: '#1e88e5',
-              '&:hover': {
-                backgroundColor: '#ffeb3b',
-                boxShadow: 6,
-              },
-            }}
-          >
-            Get Started
-          </Button>
+          <Link href="/register" passHref>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                px: 4,
+                py: 1.5,
+                borderRadius: '30px',
+                fontWeight: 'bold',
+                textTransform: 'none',
+                boxShadow: 4,
+                backgroundColor: '#fdd835',
+                color: '#1e88e5',
+                '&:hover': {
+                  backgroundColor: '#ffeb3b',
+                  boxShadow: 6,
+                },
+              }}
+            >
+              Get Started
+            </Button>
+          </Link>
         </Container>
       </Box>
+
       <Footer />
     </>
   );
