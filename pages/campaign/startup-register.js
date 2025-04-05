@@ -9,6 +9,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+  Paper,
 } from '@mui/material';
 
 export default function StartupRegister() {
@@ -72,139 +73,35 @@ export default function StartupRegister() {
           component="form"
           onSubmit={handleSubmit}
           noValidate
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-          }}
+          sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
         >
-          <TextField
-            label="Startup Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-          />
-          <TextField
-            label="Founders"
-            name="founders"
-            value={formData.founders}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-          />
-          <TextField
-            label="Startup Description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-            multiline
-            rows={4}
-          />
-          <FormControl fullWidth variant="outlined" required>
-            <InputLabel id="prototype-ready-label">
-              Prototype Ready?
-            </InputLabel>
-            <Select
-              labelId="prototype-ready-label"
-              label="Prototype Ready?"
-              name="prototypeReady"
-              value={formData.prototypeReady}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+          <TextField label="Startup Name" name="name" value={formData.name} onChange={handleChange} required fullWidth />
+          <TextField label="Founders" name="founders" value={formData.founders} onChange={handleChange} required fullWidth />
+          <TextField label="Startup Description" name="description" value={formData.description} onChange={handleChange} required fullWidth multiline rows={4} />
+          <FormControl fullWidth required>
+            <InputLabel id="prototype-ready-label">Prototype Ready?</InputLabel>
+            <Select labelId="prototype-ready-label" name="prototypeReady" value={formData.prototypeReady} onChange={handleChange} label="Prototype Ready?">
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth variant="outlined" required>
-            <InputLabel id="revenue-model-label">
-              Revenue Model
-            </InputLabel>
-            <Select
-              labelId="revenue-model-label"
-              label="Revenue Model"
-              name="revenueModel"
-              value={formData.revenueModel}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+          <FormControl fullWidth required>
+            <InputLabel id="revenue-model-label">Revenue Model</InputLabel>
+            <Select labelId="revenue-model-label" name="revenueModel" value={formData.revenueModel} onChange={handleChange} label="Revenue Model">
               <MenuItem value="subscription">Subscription</MenuItem>
               <MenuItem value="freemium">Freemium</MenuItem>
               <MenuItem value="saas">SaaS</MenuItem>
               <MenuItem value="other">Other</MenuItem>
             </Select>
           </FormControl>
-          <TextField
-            label="Expected Funding ($)"
-            name="fundingAmount"
-            type="number"
-            value={formData.fundingAmount}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-          />
-          <TextField
-            label="Roadmap"
-            name="roadmap"
-            value={formData.roadmap}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-            multiline
-            rows={3}
-          />
-          <TextField
-            label="Unit Economy"
-            name="unitEconomy"
-            value={formData.unitEconomy}
-            onChange={handleChange}
-            required
-            fullWidth
-            variant="outlined"
-            multiline
-            rows={3}
-          />
-          <Button
-            variant="outlined"
-            component="label"
-            fullWidth
-            sx={{
-              borderColor: '#1976d2',
-              color: '#1976d2',
-            }}
-          >
+          <TextField label="Expected Funding ($)" name="fundingAmount" type="number" value={formData.fundingAmount} onChange={handleChange} required fullWidth />
+          <TextField label="Roadmap" name="roadmap" value={formData.roadmap} onChange={handleChange} required fullWidth multiline rows={3} />
+          <TextField label="Unit Economy" name="unitEconomy" value={formData.unitEconomy} onChange={handleChange} required fullWidth multiline rows={3} />
+          <Button variant="outlined" component="label" fullWidth sx={{ borderColor: '#1976d2', color: '#1976d2' }}>
             Upload Compliance Document
-            <input
-              type="file"
-              name="complianceDoc"
-              onChange={handleChange}
-              hidden
-              required
-            />
+            <input type="file" name="complianceDoc" onChange={handleChange} hidden required />
           </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              py: 1.5,
-              mt: 2,
-              backgroundColor: '#1976d2',
-            }}
-          >
+          <Button type="submit" variant="contained" fullWidth sx={{ py: 1.5, mt: 2, backgroundColor: '#1976d2' }}>
             Submit
           </Button>
         </Box>

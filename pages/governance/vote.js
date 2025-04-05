@@ -24,8 +24,6 @@ const fakeProposal = {
 export default function VotePage() {
   const router = useRouter();
   const { id } = router.query;
-
-  // For demonstration, use fakeProposal. In production, fetch the proposal by id.
   const proposal = fakeProposal;
 
   const [vote, setVote] = useState('');
@@ -43,7 +41,6 @@ export default function VotePage() {
       setError('Please select a vote option.');
       return;
     }
-    // Simulate an API call to submit the vote.
     try {
       console.log({ proposalId: id, vote, weight });
       setSuccess('Your vote has been submitted successfully!');
@@ -91,26 +88,12 @@ export default function VotePage() {
           <RadioGroup row value={vote} onChange={handleVoteChange}>
             <FormControlLabel
               value="approve"
-              control={
-                <Radio
-                  sx={{
-                    color: '#4caf50',
-                    '&.Mui-checked': { color: '#4caf50' },
-                  }}
-                />
-              }
+              control={<Radio sx={{ color: '#4caf50', '&.Mui-checked': { color: '#4caf50' } }} />}
               label="Approve"
             />
             <FormControlLabel
               value="reject"
-              control={
-                <Radio
-                  sx={{
-                    color: '#f44336',
-                    '&.Mui-checked': { color: '#f44336' },
-                  }}
-                />
-              }
+              control={<Radio sx={{ color: '#f44336', '&.Mui-checked': { color: '#f44336' } }} />}
               label="Reject"
             />
           </RadioGroup>
