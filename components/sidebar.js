@@ -1,5 +1,5 @@
 // components/Sidebar.js
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Box,
   Drawer,
@@ -22,12 +22,26 @@ const menuItems = [
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const timeoutRef = useRef(null);
+
+  // Handle hover enter: cancel any close timeout
+  const handleMouseEnter = () => {
+    clearTimeout(timeoutRef.current);
+    setOpen(true);
+  };
+
+  // Handle hover leave: close after a short delay to prevent flicker
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpen(false);
+    }, 300);
+  };
 
   return (
     <Box sx={{ position: 'fixed', top: 16, left: 16, zIndex: 1300 }}>
-      {/* Removed Tooltip wrapper */}
+      {/* Hamburger Icon (No tooltip) */}
       <IconButton
-        onMouseEnter={() => setOpen(true)}
+        onMouseEnter={handleMouseEnter}
         sx={{
           backgroundColor: '#1976d2',
           color: '#fff',
@@ -39,6 +53,7 @@ export default function Sidebar() {
         <MenuIcon />
       </IconButton>
 
+      {/* Drawer opens on hover and closes smoothly */}
       <Drawer
         anchor="left"
         open={open}
@@ -56,9 +71,10 @@ export default function Sidebar() {
           },
         }}
         ModalProps={{ keepMounted: true }}
-        onMouseLeave={() => setOpen(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* ✅ Only this "Menu" heading remains */}
+        {/* Static Menu Heading */}
         <Typography
           variant="h6"
           align="center"
@@ -73,6 +89,7 @@ export default function Sidebar() {
           Menu
         </Typography>
 
+        {/* Navigation Links */}
         <List>
           {menuItems.map((item) => (
             <Link href={item.path} key={item.label} passHref legacyBehavior>

@@ -1,4 +1,3 @@
-// pages/index.js
 import Link from 'next/link';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
@@ -14,9 +13,10 @@ export default function Home() {
       <CssBaseline />
       <Header />
 
+      {/* 🔵 Gradient Hero Section */}
       <Box
         sx={{
-          minHeight: '80vh',
+          minHeight: 'calc(100vh - 120px)', // Adjust to fit footer
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -25,6 +25,7 @@ export default function Home() {
           textAlign: 'center',
           px: 2,
           py: 8,
+          m: 0, // removes any margin
         }}
       >
         <Container maxWidth="md">
@@ -34,7 +35,8 @@ export default function Home() {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-              textShadow: '2px 2px 6px rgba(0,0,0,0.3)',
+              textShadow: '2px 2px 6px rgba(0,0,0,0.2)',
+              m: 0,
             }}
           >
             Welcome to the Future of Startup Investing
@@ -49,37 +51,41 @@ export default function Home() {
               opacity: 0.95,
               fontWeight: 300,
               lineHeight: 1.6,
+              m: 0,
             }}
           >
             A trustless, milestone-based funding system secured by blockchain.
             Join as an investor or list your startup to raise funds transparently.
           </Typography>
 
-          <Link href="/register" passHref>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                px: 4,
-                py: 1.5,
-                borderRadius: '30px',
-                fontWeight: 'bold',
-                textTransform: 'none',
-                boxShadow: 4,
-                backgroundColor: '#fdd835',
-                color: '#1e88e5',
-                '&:hover': {
-                  backgroundColor: '#ffeb3b',
-                  boxShadow: 6,
-                },
-              }}
-            >
-              Get Started
-            </Button>
-          </Link>
+          <Link href="/connect-wallet" passHref>
+          
+        <Button
+          variant="contained"
+          size="large"
+          sx={{
+            px: 4,
+            py: 1.5,
+            borderRadius: '30px',
+            fontWeight: 'bold',
+            textTransform: 'none',
+            boxShadow: 4,
+            backgroundColor: '#fdd835',
+            color: '#1e88e5',
+            '&:hover': {
+              backgroundColor: '#ffeb3b',
+              boxShadow: 6,
+            },
+          }}
+        >
+          Get Started
+        </Button>
+      </Link>
+
         </Container>
       </Box>
 
+      {/* ⚪ Footer (No gap above!) */}
       <Footer />
     </>
   );
