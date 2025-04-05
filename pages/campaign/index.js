@@ -1,4 +1,6 @@
-import { Card, CardContent, Typography, Button, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Container } from '@mui/material';
+import Header from '../../components/layout/Header'; // adjust path if needed
+import Footer from '../../components/layout/Footer'; // adjust path if needed
 
 const mockCampaigns = [
   { id: 1, title: 'Web3 Wallet Startup', goal: '50 ETH', raised: '23 ETH' },
@@ -7,18 +9,43 @@ const mockCampaigns = [
 
 export default function CampaignList() {
   return (
-    <Grid container spacing={4} padding={4} bgcolor="#f0f6ff">
-      {mockCampaigns.map((c) => (
-        <Grid item xs={12} md={6} key={c.id}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5" fontWeight="bold">{c.title}</Typography>
-              <Typography variant="body1" color="text.secondary">Goal: {c.goal} | Raised: {c.raised}</Typography>
-              <Button href={`/campaign/${c.id}`} variant="contained" sx={{ mt: 2 }}>View</Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Header />
+
+      <Box sx={{ minHeight: '80vh', bgcolor: '#f0f6ff', py: 4 }}>
+        <Container maxWidth="md">
+          {mockCampaigns.map((c) => (
+            <Card
+              key={c.id}
+              sx={{
+                mb: 3,
+                p: 2,
+                borderRadius: 2,
+                boxShadow: 3,
+              }}
+            >
+              <CardContent>
+                <Typography variant="h5" fontWeight="bold">
+                  {c.title}
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ my: 1 }}>
+                  Goal: {c.goal} | Raised: {c.raised}
+                </Typography>
+                <Button
+                  href={`/campaign/${c.id}`}
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 1 }}
+                >
+                  View
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </Container>
+      </Box>
+
+      <Footer />
+    </>
   );
 }

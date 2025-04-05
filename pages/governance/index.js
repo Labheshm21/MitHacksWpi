@@ -1,6 +1,8 @@
 // pages/governance/index.js
 import React from 'react';
 import Link from 'next/link';
+import Header from '../../components/layout/Header'; // adjust path if needed
+import Footer from '../../components/layout/Footer';
 import {
   Container,
   Typography,
@@ -9,7 +11,6 @@ import {
   CardActions,
   Button,
   Box,
-  Grid,
   LinearProgress,
 } from '@mui/material';
 
@@ -22,7 +23,6 @@ const proposals = [
     voteCount: 120,
     quorum: 200,
     stage: 'Concept Approval',
-    // If true, indicates that weighted voting is used for this proposal.
     weighted: true,
   },
   {
@@ -38,21 +38,30 @@ const proposals = [
 
 export default function GovernanceDashboard() {
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Governance Dashboard
-      </Typography>
-      <Typography variant="subtitle1" align="center" gutterBottom>
-        Review proposals, cast your vote, and participate in milestone decisions.
-      </Typography>
-      <Grid container spacing={3}>
-        {proposals.map((proposal) => {
-          const progress = (proposal.voteCount / proposal.quorum) * 100;
-          return (
-            <Grid item xs={12} md={6} key={proposal.id}>
-              <Card variant="outlined">
+    <>
+      <Header />
+
+      <Box sx={{ minHeight: '80vh', bgcolor: '#f9fbff', py: 4 }}>
+        <Container maxWidth="md">
+          <Typography variant="h4" align="center" gutterBottom>
+            Governance Dashboard
+          </Typography>
+          <Typography variant="subtitle1" align="center" gutterBottom>
+            Review proposals, cast your vote, and participate in milestone decisions.
+          </Typography>
+
+          {proposals.map((proposal) => {
+            const progress = (proposal.voteCount / proposal.quorum) * 100;
+            return (
+              <Card
+                key={proposal.id}
+                variant="outlined"
+                sx={{ mb: 3, p: 2, borderRadius: 2 }}
+              >
                 <CardContent>
-                  <Typography variant="h6">{proposal.title}</Typography>
+                  <Typography variant="h6" fontWeight="bold">
+                    {proposal.title}
+                  </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {proposal.description}
                   </Typography>
@@ -78,15 +87,18 @@ export default function GovernanceDashboard() {
                   </Link>
                 </CardActions>
               </Card>
-            </Grid>
-          );
-        })}
-      </Grid>
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="body2" align="center" color="text.secondary">
-          Investor Protection • Transparency • Dispute Resolution
-        </Typography>
+            );
+          })}
+
+          <Box sx={{ mt: 4 }}>
+            <Typography variant="body2" align="center" color="text.secondary">
+              Investor Protection • Transparency • Dispute Resolution
+            </Typography>
+          </Box>
+        </Container>
       </Box>
-    </Container>
+
+      <Footer />
+    </>
   );
 }
