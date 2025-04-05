@@ -1,9 +1,28 @@
-// pages/connect-wallet.js
+import React, { useState } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { Box, Typography, Button, Container } from '@mui/material';
+import { ethers } from 'ethers';
 
 export default function ConnectWallet() {
+  const [walletAddress, setWalletAddress] = useState('');
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const address = await signer.getAddress();
+        setWalletAddress(address);
+      } catch (error) {
+        alert('Wallet connection failed. Please try again.');
+        console.error(error);
+      }
+    } else {
+      alert('No wallet found. Please install MetaMask.');
+    }
+  };
+
   return (
     <>
       <Header />
@@ -60,9 +79,11 @@ export default function ConnectWallet() {
                 boxShadow: 6,
               },
             }}
-            onClick={() => alert('Simulating wallet connection...')} // 🔄 Replace with real connect logic
+            onClick={connectWallet}
           >
-            Connect Wallet
+            {walletAddress
+              ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+              : 'Connect Wallet'}
           </Button>
         </Container>
       </Box>
