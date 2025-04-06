@@ -54,7 +54,11 @@ export default function InvestorRegister() {
         alert('Profile updated successfully!');
       }
     } catch (error) {
+<<<<<<< HEAD
       console.warn('Backend error - localStorage used only');
+=======
+      console.warn('API failed, continuing with localStorage only.');
+>>>>>>> 0ede30235a380fdec214c310ce8c1afd9a4f2110
     }
 
     // Redirect back to dashboard
