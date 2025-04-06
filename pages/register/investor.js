@@ -30,7 +30,7 @@ export default function InvestorRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/investor-register', {
+    const res = await fetch('/pages/investor-register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

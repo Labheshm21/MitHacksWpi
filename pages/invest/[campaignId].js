@@ -21,7 +21,7 @@ export default function InvestPage() {
     e.preventDefault();
     const payload = { campaignId, amount, investorName, investorId };
 
-    const res = await fetch('/api/invest', {
+    const res = await fetch('/pages/invest', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

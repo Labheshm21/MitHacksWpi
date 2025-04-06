@@ -40,7 +40,7 @@ export default function StartupRegister() {
       body.append(key, formData[key]);
     });
 
-    const res = await fetch('/api/startup-register', {
+    const res = await fetch('/pages/campaign/startup-register', {
       method: 'POST',
       body,
     });
