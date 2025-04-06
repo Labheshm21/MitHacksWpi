@@ -30,6 +30,7 @@ export default function InvestorRegister() {
   // ✅ Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
 
     // Save to localStorage
     localStorage.setItem('investorProfile', JSON.stringify(formData));
@@ -47,6 +48,17 @@ export default function InvestorRegister() {
       }
     } catch (error) {
       console.warn('API failed, continuing with localStorage only.');
+=======
+    const res = await fetch('/pages/investor-register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (res.ok) {
+      alert('Investor registered successfully!');
+    } else {
+      alert('Error submitting investor registration.');
+>>>>>>> 6ba10c39dbb97731f5df4560b957bde1f85a6d22
     }
 
     // Redirect to Investor Dashboard
