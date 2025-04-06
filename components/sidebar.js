@@ -15,9 +15,6 @@ import Link from 'next/link';
 const menuItems = [
   { label: 'Campaign', path: '/campaign' },
   { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Governance', path: '/governance' },
-  { label: 'Invest', path: '/invest' },
-  { label: 'Register', path: '/register' },
 ];
 
 export default function Sidebar() {
