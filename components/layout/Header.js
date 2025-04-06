@@ -9,7 +9,7 @@ export default function Header() {
         color: 'white',
         py: 4,
         textAlign: 'center',
-        boxShadow: 4,
+        boxShadow: 3,
         borderBottom: '3px solid #1976d2',
       }}
     >
@@ -23,7 +23,7 @@ export default function Header() {
             mb: 1,
           }}
         >
-          Decentralized Startup Platform
+          Venturly
         </Typography>
         <Typography
           variant="subtitle2"
@@ -34,7 +34,7 @@ export default function Header() {
             color: 'rgba(255,255,255,0.9)',
           }}
         >
-          Fundraising. Transparency. DAO-powered.
+          Fueling Tomorrow's Ventures, Today.
         </Typography>
       </Container>
     </Box>
