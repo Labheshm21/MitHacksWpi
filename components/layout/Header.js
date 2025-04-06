@@ -34,7 +34,7 @@ export default function Header() {
             color: 'rgba(255,255,255,0.9)',
           }}
         >
-          Fueling Tomorrow's Ventures, Today.
+          Fueling The Ventures of Tomorrow, Today.
         </Typography>
       </Container>
     </Box>

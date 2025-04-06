@@ -23,16 +23,16 @@ export default function ConnectWallet() {
         setCountdown((prev) => {
           if (prev === 1) {
             clearInterval(timer);
-            router.push('/select-role');
+            router.push('/select-role'); // using `router` here
             return 0;
           }
           return prev - 1;
         });
       }, 1000);
     }
-
+  
     return () => clearInterval(timer);
-  }, [isConnected]);
+  }, [isConnected, router]); 
 
   return (
     <>

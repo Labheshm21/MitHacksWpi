@@ -25,7 +25,7 @@ export default function SelectRole() {
     } else if (storedRole === 'founder') {
       router.push('/dashboard/startup');
     }
-  }, []);
+  }, [router]);
 
   // 🚀 Redirect based on selection
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function SelectRole() {
         router.push('/dashboard/startup');
       }
     }
-  }, [selectedRole]);
+  }, [router, selectedRole]);
 
   return (
     <>
