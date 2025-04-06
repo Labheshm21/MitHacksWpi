@@ -14,12 +14,12 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
-<<<<<<< HEAD
+
     "ether": "^0.0.9",
     "ethers": "^6.13.5",
-=======
+
     "axios": "^1.8.4",
->>>>>>> c28869d850af5909f4911f91cdcfbc8688184d3c
+
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

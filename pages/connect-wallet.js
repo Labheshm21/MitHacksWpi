@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { Box, Typography, Button, Container } from '@mui/material';
-import { ethers } from 'ethers';
+import {
+  Box,
+  Typography,
+  Container,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  Paper,
+  Grid,
+} from '@mui/material';
 
-export default function ConnectWallet() {
-  const [walletAddress, setWalletAddress] = useState('');
-
-  const connectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const address = await signer.getAddress();
-        setWalletAddress(address);
-      } catch (error) {
-        alert('Wallet connection failed. Please try again.');
-        console.error(error);
-      }
-    } else {
-      alert('No wallet found. Please install MetaMask.');
-    }
-  };
+export default function SelectRole() {
+  const [selectedRole, setSelectedRole] = useState('');
 
   return (
     <>
@@ -30,61 +22,93 @@ export default function ConnectWallet() {
       <Box
         sx={{
           minHeight: '80vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           background: 'linear-gradient(135deg, #2196f3, #66bb6a)',
-          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
           px: 2,
-          py: 8,
+          pt: 6,
         }}
       >
-        <Container maxWidth="sm">
+        <Container maxWidth="md" sx={{ textAlign: 'center' }}>
           <Typography
             variant="h4"
             gutterBottom
             sx={{
               fontFamily: '"Abadi", Tahoma, Geneva, sans-serif',
-              fontWeight: 'bold',
               color: '#fff',
-            }}
-          >
-            Connect to Wallet
-          </Typography>
-
-          <Typography
-            variant="body1"
-            paragraph
-            sx={{
-              fontFamily: '"Abadi", Tahoma, Geneva, sans-serif',
-              color: '#f0f0f0',
+              fontWeight: 400, // not bold
               mb: 4,
             }}
           >
-            Securely connect your Web3 wallet to continue.
+            Are you an investor or a startup founder?
           </Typography>
 
-          <Button
-            variant="contained"
-            size="large"
-            sx={{
-              fontWeight: 'bold',
-              textTransform: 'none',
-              px: 4,
-              py: 1.5,
-              backgroundColor: '#fdd835',
-              color: '#1e88e5',
-              '&:hover': {
-                backgroundColor: '#ffeb3b',
-                boxShadow: 6,
-              },
-            }}
-            onClick={connectWallet}
+          <RadioGroup
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
           >
-            {walletAddress
-              ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-              : 'Connect Wallet'}
-          </Button>
+            <Grid container spacing={4} justifyContent="center">
+              <Grid item xs={12} sm={6}>
+                <Paper
+                  elevation={selectedRole === 'investor' ? 6 : 2}
+                  sx={{
+                    p: 4,
+                    backgroundColor: selectedRole === 'investor' ? '#fdd835' : '#fff',
+                    transition: '0.3s',
+                    cursor: 'pointer',
+                    borderRadius: 2,
+                  }}
+                  onClick={() => setSelectedRole('investor')}
+                >
+                  <FormControlLabel
+                    value="investor"
+                    control={<Radio />}
+                    label={
+                      <Typography
+                        sx={{
+                          fontSize: '1.2rem',
+                          fontFamily: '"Abadi", Tahoma, Geneva, sans-serif',
+                        }}
+                      >
+                        Investor
+                      </Typography>
+                    }
+                    sx={{ width: '100%', justifyContent: 'center' }}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Paper
+                  elevation={selectedRole === 'founder' ? 6 : 2}
+                  sx={{
+                    p: 4,
+                    backgroundColor: selectedRole === 'founder' ? '#fdd835' : '#fff',
+                    transition: '0.3s',
+                    cursor: 'pointer',
+                    borderRadius: 2,
+                  }}
+                  onClick={() => setSelectedRole('founder')}
+                >
+                  <FormControlLabel
+                    value="founder"
+                    control={<Radio />}
+                    label={
+                      <Typography
+                        sx={{
+                          fontSize: '1.2rem',
+                          fontFamily: '"Abadi", Tahoma, Geneva, sans-serif',
+                        }}
+                      >
+                        Startup Founder
+                      </Typography>
+                    }
+                    sx={{ width: '100%', justifyContent: 'center' }}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
+          </RadioGroup>
         </Container>
       </Box>
 
