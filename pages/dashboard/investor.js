@@ -2,20 +2,22 @@ import React, { useEffect, useState } from 'react';
 import {
   Container,
   Typography,
-  Grid,
   Card,
   CardContent,
   Box,
   Avatar,
   Button,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import Link from 'next/link';
+import Footer from '../../components/layout/Footer';
 
 export default function InvestorDashboard() {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    // Load profile from localStorage
     const stored = localStorage.getItem('investorProfile');
     if (stored) {
       setProfile(JSON.parse(stored));
@@ -28,54 +30,68 @@ export default function InvestorDashboard() {
   ];
 
   return (
-    <Container sx={{ py: 4, backgroundColor: '#f9fafc', minHeight: '100vh' }}>
-      {/* 👤 Profile (Right aligned) */}
-      {profile && (
+    <>
+      <Container sx={{ py: 4, backgroundColor: '#f9fafc', minHeight: '100vh' }}>
+        {/* 👤 Profile Header (Top Right) */}
+        {profile && (
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              gap: 2,
+              mb: 3,
+            }}
+          >
+            <Tooltip title="Edit Profile">
+              <IconButton
+                component={Link}
+                href="/register/investor"
+                sx={{ color: '#1976d2' }}
+              >
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Avatar sx={{ bgcolor: '#1976d2' }}>
+              {profile.investorName?.charAt(0).toUpperCase()}
+            </Avatar>
+
+            <Box>
+              <Typography fontWeight="bold">{profile.investorName}</Typography>
+              <Typography variant="body2" color="textSecondary">
+                Tokens: 💰150
+              </Typography>
+            </Box>
+          </Box>
+        )}
+
+        {/* 🏷️ Title */}
+        <Typography
+          variant="h4"
+          align="center"
+          gutterBottom
+          sx={{ color: '#1976d2', fontWeight: 'bold', mb: 4 }}
+        >
+          Investor Dashboard
+        </Typography>
+
+        {/* 💳 Investment Cards */}
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
+            flexDirection: 'column',
             alignItems: 'center',
-            mb: 2,
-            pr: 2,
+            gap: 3,
           }}
         >
-          <Avatar sx={{ bgcolor: '#1976d2', mr: 2 }}>
-            {profile.investorName?.[0]?.toUpperCase()}
-          </Avatar>
-          <Box>
-            <Typography sx={{ fontWeight: 'bold' }}>{profile.investorName}</Typography>
-            <Typography variant="body2" sx={{ color: '#555' }}>
-              Tokens: 150
-            </Typography>
-          </Box>
-        </Box>
-      )}
-
-      {/* 🧭 Title */}
-      <Typography
-        variant="h4"
-        align="center"
-        gutterBottom
-        sx={{ color: '#1976d2', fontWeight: 'bold' }}
-      >
-        Investor Dashboard
-      </Typography>
-
-      {/* 💰 Investments */}
-      <Typography
-        variant="h6"
-        align="center"
-        sx={{ mt: 5, mb: 2, color: '#1976d2', fontWeight: 'bold' }}
-      >
-        Your Investments
-      </Typography>
-      <Grid container spacing={3} justifyContent="center">
-        {investments.map((inv) => (
-          <Grid item xs={12} sm={6} md={4} key={inv.id}>
+          {investments.map((inv) => (
             <Card
+              key={inv.id}
               elevation={4}
               sx={{
+                width: '100%',
+                maxWidth: 500,
                 borderRadius: 2,
                 backgroundColor: '#fff',
                 p: 2,
@@ -92,23 +108,28 @@ export default function InvestorDashboard() {
                 </Typography>
               </CardContent>
             </Card>
-          </Grid>
-        ))}
-      </Grid>
+          ))}
 
-      {/* 📄 Complete Profile Prompt */}
-      {!profile && (
-        <Box sx={{ mt: 6, textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Please complete your investor profile
-          </Typography>
-          <Link href="/register/investor" passHref>
-            <Button variant="contained" sx={{ backgroundColor: '#1976d2' }}>
-              Complete Profile
+          {/* 🔗 Join Campaign */}
+          <Link href="/campaign" passHref>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: '#1976d2',
+                fontWeight: 'bold',
+                px: 4,
+                py: 1.2,
+                borderRadius: 3,
+                mt: 2,
+              }}
+            >
+              Join Campaign
             </Button>
           </Link>
         </Box>
-      )}
-    </Container>
+      </Container>
+
+      <Footer />
+    </>
   );
 }
